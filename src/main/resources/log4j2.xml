@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://github.com/kishanjavatrainer/HibernateLog4jExample/blob/master/HibernateLog4jExample/log4j2.xml -->
+<Configuration>
+    <Appenders>
+
+        <!-- Define Console Appender -->
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- Define File Appender -->
+        <File name="fileAppender" fileName="bookstore.log">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+        </File>
+
+    </Appenders>
+    <Loggers>
+        <!-- Log everything in hibernate -->
+        <Logger name="org.hibernate" level="info" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+        </Logger>
+
+        <!-- Logger for dao -->
+        <Logger name="com.addressbook.dao" level="info" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="fileAppender" />
+        </Logger>
+
+        <!-- Logger for main -->
+        <Logger name="com.main" level="info" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="fileAppender" />
+        </Logger>
+
+        <!-- Logger for SQL statements -->
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="fileAppender" />
+        </Logger>
+
+        <!-- Logger for JDBC bind parameters -->
+        <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="fileAppender" />
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="fileAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
