@@ -1,50 +1,72 @@
 package com.addressbook.dao;
 
 import com.addressbook.entity.Person;
-import com.utils.HibernateUtils;
+import com.addressbook.gui.AlertBox;
+import com.addressbook.utils.HibernateUtils;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public void addPerson(Person person) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(person);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            Session session = HibernateUtils.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(person);
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            AlertBox.show("Error!", "Action failed...");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Person> listPerson() {
-        List<Person> personList = new ArrayList<>();
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        personList = session.createQuery("FROM Person").list();
-        session.getTransaction().commit();
-        session.close();
-        return personList;
+        try {
+            List<Person> personList;
+            Session session = HibernateUtils.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            personList = session.createQuery("FROM Person").list();
+            transaction.commit();
+            session.close();
+            return personList;
+        } catch (Exception e) {
+            AlertBox.show("Error!", "Action failed...");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void removePerson(Integer personId) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        Person person = (Person) session.load(Person.class , personId);
-        session.delete(person);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            Session session = HibernateUtils.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            Person person = session.load(Person.class , personId);
+            session.delete(person);
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            AlertBox.show("Error!", "Action failed...");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updatePerson(Person person) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.update(person);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            Session session = HibernateUtils.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(person);
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            AlertBox.show("Error!", "Action failed...");
+            e.printStackTrace();
+        }
     }
 }

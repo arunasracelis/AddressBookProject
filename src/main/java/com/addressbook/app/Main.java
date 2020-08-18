@@ -1,28 +1,24 @@
 package com.addressbook.app;
 
-import com.addressbook.dao.*;
-import com.addressbook.entity.Email;
-import com.addressbook.entity.Person;
-import com.addressbook.entity.Phone;
+import com.addressbook.gui.HomeWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        //initialize()
-        GUIController guiController = new GUIController();
-        guiController.main(stage);
+    public void start(Stage stage) {
+        //initialize();
+        HomeWindow.show();
     }
 
     public void initialize() {
 
-        PersonDAO personDAO = new PersonDAOImpl();
+        /*PersonDAO personDAO = new PersonDAOImpl();
         EmailDAO emailDAO = new EmailDAOImpl();
         PhoneDAO phoneDAO = new PhoneDAOImpl();
 
@@ -58,7 +54,7 @@ public class Main extends Application {
         phoneDAO.addPhone(2, phone3);
         phoneDAO.addPhone(2, phone4);
         phoneDAO.addPhone(3, phone5);
-        phoneDAO.addPhone(3, phone6);
+        phoneDAO.addPhone(3, phone6);*/
     }
 
 }

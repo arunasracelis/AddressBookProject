@@ -10,7 +10,7 @@ public class Phone {
     @Id
     @GeneratedValue
     @Column(name="phone_id", nullable=false)
-    private Integer id;
+    private Integer phoneId;
     @Column(name="number", nullable=false)
     private String number;
 
@@ -21,24 +21,25 @@ public class Phone {
     public Phone() {
     }
 
-    public Phone(String number) {
+    public Phone(Integer phoneId, String number) {
+        this.phoneId = phoneId;
         this.number = number;
     }
 
     @Override
     public String toString() {
         return "Phone{" +
-                "id=" + id +
+                "phoneId=" + phoneId +
                 ", number='" + number + '\'' +
                 '}';
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPhoneId() {
+        return phoneId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPhoneId(Integer phoneId) {
+        this.phoneId = phoneId;
     }
 
     public String getNumber() {

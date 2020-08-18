@@ -8,8 +8,6 @@ import com.addressbook.service.AddressBookServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.List;
-
 public class AppController {
 
     private AddressBookService addressBookService = new AddressBookServiceImpl();
@@ -21,24 +19,32 @@ public class AppController {
         addressBookService.addPerson(contact);
     }
 
+    public void addEmail(Integer personId, Email email){
+        addressBookService.addEmail(personId, email);
+    }
+
+    public void addPhone(Integer personId, Phone phone){
+        addressBookService.addPhone(personId, phone);
+    }
+
     public ObservableList<Person> getPersonList(){
         if(!personList.isEmpty())
             personList.clear();
-        personList = FXCollections.observableList((List<Person>) addressBookService.listPerson());
+        personList = FXCollections.observableList(addressBookService.listPerson());
         return personList;
     }
 
     public ObservableList<Email> getEmailList(Integer personId){
         if(!emailList.isEmpty())
             emailList.clear();
-        emailList = FXCollections.observableList((List<Email>) addressBookService.listEmail(personId));
+        emailList = FXCollections.observableList(addressBookService.listEmail(personId));
         return emailList;
     }
 
     public ObservableList<Phone> getPhoneList(Integer personId){
         if(!phoneList.isEmpty())
             phoneList.clear();
-        phoneList = FXCollections.observableList((List<Phone>) addressBookService.listPhone(personId));
+        phoneList = FXCollections.observableList(addressBookService.listPhone(personId));
         return phoneList;
     }
 
@@ -46,8 +52,24 @@ public class AppController {
         addressBookService.removePerson(id);
     }
 
+    public void removeEmail(Integer personId, Integer emailId)     {
+        addressBookService.removeEmail(personId, emailId);
+    }
+
+    public void removePhone(Integer personId, Integer phoneId)     {
+        addressBookService.removePhone(personId, phoneId);
+    }
+
     public void updatePerson(Person person){
         addressBookService.updatePerson(person);
+    }
+
+    public void updateEmail(Email email){
+        addressBookService.updateEmail(email);
+    }
+
+    public void updatePhone(Phone phone){
+        addressBookService.updatePhone(phone);
     }
 
 }

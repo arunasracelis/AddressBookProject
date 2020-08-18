@@ -18,9 +18,9 @@ public class Person {
     private String lastName;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Email> emails = new ArrayList<Email>();
+    private List<Email> emails = new ArrayList<>();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Phone> phones = new ArrayList<Phone>();
+    private List<Phone> phones = new ArrayList<>();
 
     public Person() {
     }

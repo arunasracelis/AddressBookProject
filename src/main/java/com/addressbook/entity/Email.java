@@ -21,8 +21,9 @@ public class Email {
     public Email(){
     }
 
-    public Email(String email) {
-        this.address = email;
+    public Email(Integer emailId, String address) {
+        this.emailId = emailId;
+        this.address = address;
     }
 
     @Override
