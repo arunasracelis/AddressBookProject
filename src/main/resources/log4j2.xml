@@ -9,7 +9,7 @@
         </Console>
 
         <!-- Define File Appender -->
-        <File name="fileAppender" fileName="bookstore.log">
+        <File name="fileAppender" fileName="addressbook.log">
             <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
         </File>
 

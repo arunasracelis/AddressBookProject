@@ -2,14 +2,20 @@ package com.addressbook.dao;
 
 import com.addressbook.entity.Person;
 import com.addressbook.entity.Phone;
+import com.addressbook.gui.AlertBox;
+import com.addressbook.utils.ExceptionUtils;
 import com.addressbook.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.Query;
 import java.util.List;
 
 public class PhoneDAOImpl implements PhoneDAO {
+
+    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
 
     @Override
     public void addPhone(Integer personId, Phone phone) {
@@ -24,7 +30,8 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("ERROR! addPhone failed: "  + ExceptionUtils.findRootCause(e));
+            AlertBox.show("Error!", "Action failed...");
         }
     }
 
@@ -41,7 +48,8 @@ public class PhoneDAOImpl implements PhoneDAO {
             session.close();
             return phoneList;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("ERROR! listPhone failed: "  + ExceptionUtils.findRootCause(e));
+            AlertBox.show("Error!", "Action failed...");
             return null;
         }
     }
@@ -60,7 +68,8 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("ERROR! removePhone failed: "  + ExceptionUtils.findRootCause(e));
+            AlertBox.show("Error!", "Action failed...");
         }
     }
 
@@ -76,7 +85,8 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("ERROR! updatePhone failed: "  + ExceptionUtils.findRootCause(e));
+            AlertBox.show("Error!", "Action failed...");
         }
     }
 }

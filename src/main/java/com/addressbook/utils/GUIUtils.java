@@ -1,4 +1,4 @@
-package com.addressbook.gui;
+package com.addressbook.utils;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,8 +10,7 @@ public class GUIUtils {
     private static final String style = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
     private static final String backgroundColor = "-fx-background-color: #f0f0f0";
 
-    public static <T> BorderPane makeBorder(TableView<T> tableView, Button[] buttons, String[] buttonCaptions,
-                                            String[] labels, TextField[] textFields){
+    public static <T> BorderPane makeBorder(TableView<T> tableView, Button[] buttons, String[] buttonCaptions, String[] labels, TextField[] textFields){
         BorderPane border = new BorderPane();
         border.setTop(createButtonBox(buttons, buttonCaptions));
         border.setCenter(createForm(labels, textFields));
@@ -49,7 +48,7 @@ public class GUIUtils {
             grid.add(textFields[i], 2, i);
         }
         textFields[0].setEditable(false);
-        textFields[0].setTooltip(new Tooltip("This field is automatically generated hence not editable"));
+        textFields[0].setTooltip(new Tooltip("This field is automatically generated. It is not editable."));
         return grid;
     }
 

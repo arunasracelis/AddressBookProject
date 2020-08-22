@@ -3,14 +3,19 @@ package com.addressbook.dao;
 import com.addressbook.entity.Email;
 import com.addressbook.entity.Person;
 import com.addressbook.gui.AlertBox;
+import com.addressbook.utils.ExceptionUtils;
 import com.addressbook.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.Query;
 import java.util.List;
 
 public class EmailDAOImpl implements EmailDAO {
+
+    private static final Logger logger = LogManager.getLogger(EmailDAOImpl.class);
 
     @Override
     public void addEmail(Integer personId, Email email) {
@@ -25,8 +30,8 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            logger.error("ERROR! addEmail failed: " + ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
-            e.printStackTrace();
         }
     }
 
@@ -43,8 +48,8 @@ public class EmailDAOImpl implements EmailDAO {
             session.close();
             return emailList;
         } catch (Exception e) {
+            logger.error("ERROR! listEmail failed: " +  ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
-            e.printStackTrace();
             return null;
         }
     }
@@ -63,8 +68,8 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            logger.error("ERROR! removeEmail failed: " +  ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
-            e.printStackTrace();
         }
     }
 
@@ -80,8 +85,8 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            logger.error("ERROR! updateEmail failed: "  + ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
-            e.printStackTrace();
         }
     }
 }

@@ -7,8 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AlertBox {
+
+    private static final Logger logger = LogManager.getLogger(AlertBox.class);
 
     public static void show(String title, String message) {
         Stage alertWindow = new Stage();
@@ -27,6 +31,8 @@ public class AlertBox {
         Scene scene = new Scene(layout);
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
+
+        logger.info("AlertBox displayed");
     }
 
 }

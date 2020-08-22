@@ -1,8 +1,9 @@
 package com.addressbook.gui;
 
-import com.addressbook.app.AppController;
+import com.addressbook.controller.AppController;
 import com.addressbook.entity.Email;
 import com.addressbook.entity.Person;
+import com.addressbook.utils.GUIUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,30 +13,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static com.addressbook.gui.HomeWindow.selectedPersonId;
-
 public class EmailsWindow {
 
-    private static TableView<Email> emailsTable = new TableView<>();
+    private static final TableView<Email> emailsTable = new TableView<>();
     private static final String style = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
     private static Button[] buttons;
     private static TextField[] textFields;
     private static Integer index = 0;
+    private static Integer selectedPersonId;
 
-    private static AppController controller = new AppController();
+    private static final AppController controller = new AppController();
 
-    public static void show(Person person){
+    public static void show(Person selectedPerson){
+        selectedPersonId = selectedPerson.getPerson_id();
         Stage emailsWindow = new Stage();
         emailsWindow.initModality(Modality.APPLICATION_MODAL);
-        emailsWindow.setTitle(person.getFirstName() + " " + person.getLastName() + " | Emails");
+        emailsWindow.setTitle(selectedPerson.getFirstName() + " " + selectedPerson.getLastName() + " | Emails");
         String[] buttonCaptions = new String[]{"Add New", "Update", "Delete", "|<", "<<", ">>", ">|"};
         buttons = new Button[buttonCaptions.length];
         String[] labels = new String[]{"Email ID", "Email address"};
         textFields = new TextField[labels.length];
         BorderPane border = GUIUtils.makeBorder(emailsTable,buttons, buttonCaptions, labels,textFields);
         setOnActionForEmailsWindowButtons();
-        populateEmailsForm(person.getPerson_id(), 0);
-        populateEmailsTable(person.getPerson_id());
+        populateEmailsForm(selectedPerson.getPerson_id(), 0);
+        populateEmailsTable(selectedPerson.getPerson_id());
         emailsWindow.setScene(new Scene(border, 800, 650));
         emailsWindow.showAndWait();
     }

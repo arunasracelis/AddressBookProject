@@ -1,7 +1,8 @@
 package com.addressbook.gui;
 
-import com.addressbook.app.AppController;
+import com.addressbook.controller.AppController;
 import com.addressbook.entity.Person;
+import com.addressbook.utils.GUIUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,14 +13,13 @@ import javafx.stage.Stage;
 
 public class HomeWindow {
 
-    private static TableView<Person> personsTable = new TableView<>();
+    private static final TableView<Person> personsTable = new TableView<>();
     private static final String style = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
     private static Button[] buttons;
     private static TextField[] textFields;
     private static Integer index = 0;
-    public static Integer selectedPersonId;
 
-    private static AppController controller = new AppController();
+    private static final AppController controller = new AppController();
 
     public static void show() {
         Stage homeWindow = new Stage();
@@ -97,7 +97,6 @@ public class HomeWindow {
         if (controller.getPersonList().isEmpty())
             return;
         Person person = controller.getPersonList().get(index);
-        selectedPersonId = person.getPerson_id();
         textFields[0].setText(person.getPerson_id().toString());
         textFields[1].setText(person.getFirstName());
         textFields[2].setText(person.getLastName());

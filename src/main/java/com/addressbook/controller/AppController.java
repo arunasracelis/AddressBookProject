@@ -1,4 +1,4 @@
-package com.addressbook.app;
+package com.addressbook.controller;
 
 import com.addressbook.entity.Email;
 import com.addressbook.entity.Person;
@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 
 public class AppController {
 
-    private AddressBookService addressBookService = new AddressBookServiceImpl();
+    private final AddressBookService addressBookService = new AddressBookServiceImpl();
     private ObservableList<Person> personList= FXCollections.observableArrayList();
     private ObservableList<Email> emailList= FXCollections.observableArrayList();
     private ObservableList<Phone> phoneList= FXCollections.observableArrayList();

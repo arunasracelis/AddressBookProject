@@ -38,10 +38,6 @@ public class Email {
         return emailId;
     }
 
-    public void setEmailId(Integer emailId) {
-        this.emailId = emailId;
-    }
-
     public String getAddress() {
         return address;
     }

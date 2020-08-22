@@ -1,8 +1,9 @@
 package com.addressbook.gui;
 
-import com.addressbook.app.AppController;
+import com.addressbook.controller.AppController;
 import com.addressbook.entity.Person;
 import com.addressbook.entity.Phone;
+import com.addressbook.utils.GUIUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,30 +13,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static com.addressbook.gui.HomeWindow.selectedPersonId;
-
 public class PhonesWindow {
 
-    private static TableView<Phone> phonesTable = new TableView<>();
+    private static final TableView<Phone> phonesTable = new TableView<>();
     private static final String style = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
     private static Button[] buttons;
     private static TextField[] textFields;
     private static Integer index = 0;
+    private static Integer selectedPersonId;
 
-    private static AppController controller = new AppController();
+    private static final AppController controller = new AppController();
 
-    public static void show(Person person){
+    public static void show(Person selectedPerson){
+        selectedPersonId = selectedPerson.getPerson_id();
         Stage phonesWindow = new Stage();
         phonesWindow.initModality(Modality.APPLICATION_MODAL);
-        phonesWindow.setTitle(person.getFirstName() + " " + person.getLastName() + " | Phones");
+        phonesWindow.setTitle(selectedPerson.getFirstName() + " " + selectedPerson.getLastName() + " | Phones");
         String[] buttonCaptions = new String[]{"Add New", "Update", "Delete", "|<", "<<", ">>", ">|"};
         buttons = new Button[buttonCaptions.length];
         String[] labels = new String[]{"Phone ID", "Phone number"};
         textFields = new TextField[2];
         BorderPane border = GUIUtils.makeBorder(phonesTable,buttons, buttonCaptions, labels,textFields);
         setOnActionForPhonesWindowButtons();
-        populatePhonesForm(person.getPerson_id(), 0);
-        populatePhonesTable(person.getPerson_id());
+        populatePhonesForm(selectedPerson.getPerson_id(), 0);
+        populatePhonesTable(selectedPerson.getPerson_id());
         phonesWindow.setScene(new Scene(border, 800, 650));
         phonesWindow.showAndWait();
     }

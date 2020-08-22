@@ -44,10 +44,6 @@ public class Person {
         return person_id;
     }
 
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -68,15 +64,8 @@ public class Person {
         return emails;
     }
 
-    public void setEmails(List<Email> emails) {
-        this.emails = emails;
-    }
-
     public List<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
-    }
 }

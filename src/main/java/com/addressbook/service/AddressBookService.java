@@ -7,18 +7,18 @@ import com.addressbook.entity.Phone;
 import java.util.List;
 
 public interface AddressBookService {
-    public void addPerson(Person person);
-    public List<Person> listPerson();
-    public void removePerson(Integer id);
-    public void updatePerson(Person person);
+    void addPerson(Person person);
+    List<Person> listPerson();
+    void removePerson(Integer id);
+    void updatePerson(Person person);
 
-    public void addEmail(Integer personId, Email email);
-    public List<Email> listEmail(Integer personId);
-    public void removeEmail(Integer personId, Integer emailId);
-    public void updateEmail(Email email);
+    void addEmail(Integer personId, Email email);
+    List<Email> listEmail(Integer personId);
+    void removeEmail(Integer personId, Integer emailId);
+    void updateEmail(Email email);
 
-    public void addPhone(Integer personId, Phone phone);
-    public List<Phone> listPhone(Integer personId);
-    public void removePhone(Integer personId, Integer phoneId);
-    public void updatePhone(Phone phone);
+    void addPhone(Integer personId, Phone phone);
+    List<Phone> listPhone(Integer personId);
+    void removePhone(Integer personId, Integer phoneId);
+    void updatePhone(Phone phone);
 }

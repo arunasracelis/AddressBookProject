@@ -38,10 +38,6 @@ public class Phone {
         return phoneId;
     }
 
-    public void setPhoneId(Integer phoneId) {
-        this.phoneId = phoneId;
-    }
-
     public String getNumber() {
         return number;
     }
