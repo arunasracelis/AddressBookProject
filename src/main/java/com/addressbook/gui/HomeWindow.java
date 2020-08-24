@@ -24,6 +24,10 @@ public class HomeWindow {
     public static void show() {
         Stage homeWindow = new Stage();
         homeWindow.setTitle("Address Book Manager");
+        homeWindow.setOnCloseRequest(e -> {
+            AppController.session.close();
+            homeWindow.close();
+        });
         String[] buttonCaptions = new String[]{"Add New", "Update", "Delete", "Show emails", "Show phones", "|<", "<<", ">>", ">|"};
         buttons = new Button[buttonCaptions.length];
         String[] labels = new String[]{"Person ID", "First Name", "Last Name"};
@@ -114,5 +118,6 @@ public class HomeWindow {
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         personsTable.getColumns().setAll(personIdCol, firstNameCol, lastNameCol);
     }
+
 
 }

@@ -1,5 +1,8 @@
 package test;
 
+import com.addressbook.dao.EmailDAO;
+import com.addressbook.dao.EmailDAOImpl;
+import com.addressbook.dao.PersonDAOImpl;
 import com.addressbook.entity.Email;
 import com.addressbook.entity.Person;
 import org.hibernate.Session;
@@ -19,9 +22,14 @@ public class EmailEntityTest {
     @Test
     public void addEmailTest() {
         Session session = sessionFactoryRule.getSession();
-        Email email = createEmail("homer@simpson.com", "Homer", "Simpson");
-        session.save(email);
-        Email addedEmail = session.load(Email.class, 1);
+        PersonDAOImpl personDAO = new PersonDAOImpl();
+        EmailDAO emailDAO = new EmailDAOImpl();
+        Person person = new Person(1, "Homer", "Simpson");
+        Email email = new Email (1, "homer@simpson.com");
+        email.setPerson(person);
+        personDAO.addPerson(session, person);
+        emailDAO.addEmail(session, person.getPerson_id(),email);
+        Email addedEmail = session.load(Email.class, 2);
         assertNotNull(addedEmail);
         assertEquals("homer@simpson.com", addedEmail.getAddress());
         assertEquals("Homer", addedEmail.getPerson().getFirstName());

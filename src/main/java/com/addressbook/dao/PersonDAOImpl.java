@@ -3,7 +3,6 @@ package com.addressbook.dao;
 import com.addressbook.entity.Person;
 import com.addressbook.gui.AlertBox;
 import com.addressbook.utils.ExceptionUtils;
-import com.addressbook.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.apache.logging.log4j.LogManager;
@@ -16,13 +15,11 @@ public class PersonDAOImpl implements PersonDAO {
     private static final Logger logger = LogManager.getLogger(PersonDAOImpl.class);
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Session session, Person person) {
         try {
-            Session session = HibernateUtils.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             session.save(person);
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             logger.error("ERROR! addPerson failed: "  + ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
@@ -30,14 +27,12 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public List<Person> listPerson() {
+    public List<Person> listPerson(Session session) {
         try {
             List<Person> personList;
-            Session session = HibernateUtils.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             personList = session.createQuery("FROM Person").list();
             transaction.commit();
-            session.close();
             return personList;
         } catch (Exception e) {
             logger.error("ERROR! listPerson failed: "  + ExceptionUtils.findRootCause(e));
@@ -47,14 +42,12 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void removePerson(Integer personId) {
+    public void removePerson(Session session, Integer personId) {
         try {
-            Session session = HibernateUtils.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Person person = session.load(Person.class , personId);
             session.delete(person);
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             logger.error("ERROR! removePerson failed: "  + ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");
@@ -62,13 +55,11 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void updatePerson(Person person) {
+    public void updatePerson(Session session, Person person) {
         try {
-            Session session = HibernateUtils.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             session.update(person);
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             logger.error("ERROR! updatePerson failed:"  + ExceptionUtils.findRootCause(e));
             AlertBox.show("Error!", "Action failed...");

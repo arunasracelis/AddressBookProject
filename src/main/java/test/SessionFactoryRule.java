@@ -26,7 +26,6 @@ public class SessionFactoryRule implements MethodRule {
             public void evaluate() throws Throwable {
                 sessionFactory = createSessionFactory();
                 createSession();
-                beginTransaction();
                 try {
                     statement.evaluate();
                 } finally {
@@ -71,12 +70,14 @@ public class SessionFactoryRule implements MethodRule {
         session = sessionFactory.openSession();
         return session;
     }
+
     public void commit() {
         transaction.commit();
     }
     public void beginTransaction() {
         transaction = session.beginTransaction();
     }
+
     public Session getSession() {
         return session;
     }
