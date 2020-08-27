@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+import static com.addressbook.utils.ExceptionUtils.DEFAULT_ERROR_MESSAGE;
+
 public class PersonDAOImpl implements PersonDAO {
 
     private static final Logger logger = LogManager.getLogger(PersonDAOImpl.class);
@@ -22,7 +24,7 @@ public class PersonDAOImpl implements PersonDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! addPerson failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -36,7 +38,7 @@ public class PersonDAOImpl implements PersonDAO {
             return personList;
         } catch (Exception e) {
             logger.error("ERROR! listPerson failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
             return null;
         }
     }
@@ -50,7 +52,7 @@ public class PersonDAOImpl implements PersonDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! removePerson failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -62,7 +64,7 @@ public class PersonDAOImpl implements PersonDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! updatePerson failed:"  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 }

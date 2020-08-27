@@ -7,39 +7,44 @@ import javafx.scene.layout.*;
 
 public class GUIUtils {
 
-    private static final String style = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
-    private static final String backgroundColor = "-fx-background-color: #f0f0f0";
+    public static final String STYLE = "-fx-font-weight:normal; -fx-color: #f0f0f0; -fx-font-size:11; -fx-font-family: Verdana;";
+    private static final String BACKGROUND_COLOR = "-fx-background-color: #f0f0f0";
+    public static final String[] HOME_WINDOW_FORM_LABELS = new String[]{"Person ID", "First Name", "Last Name"};
+    public static final String[] EMAILS_WINDOW_FORM_LABELS = new String[]{"Email ID", "Email address"};
+    public static final String[] PHONES_WINDOW_FORM_LABELS = new String[]{"Phone ID", "Phone number"};
+    public static final String[] HOME_WINDOW_BUTTON_CAPTIONS = new String[]{"Add New", "Update", "Delete", "Show emails", "Show phones", "|<", "<<", ">>", ">|"};
+    public static final String[] OTHER_WINDOW_BUTTON_CAPTIONS = new String[]{"Add New", "Update", "Delete", "|<", "<<", ">>", ">|"};
 
-    public static <T> BorderPane makeBorder(TableView<T> tableView, Button[] buttons, String[] buttonCaptions, String[] labels, TextField[] textFields){
+    public static <T> BorderPane makeBorder(Pane buttonBox, Pane form, TableView<T> tableView){
         BorderPane border = new BorderPane();
-        border.setTop(createButtonBox(buttons, buttonCaptions));
-        border.setCenter(createForm(labels, textFields));
+        border.setTop(buttonBox);
+        border.setCenter(form);
         border.setBottom(tableView);
-        border.setStyle(backgroundColor);
+        border.setStyle(BACKGROUND_COLOR);
         border.setPadding(new Insets(10, 10, 10, 10));
         return border;
     }
 
-    private static Pane createButtonBox(Button[] buttons, String[] buttonCaptions) {
+    public static Pane createButtonBox(Button[] buttons, String[] buttonCaptions) {
         int width = 100;
         HBox box = new HBox();
         box.setAlignment(Pos. CENTER);
         box.setSpacing(5);
         for (int i = 0; i < buttonCaptions.length; i++) {
             buttons[i] = new Button(buttonCaptions[i]);
-            buttons[i].setStyle(style);
+            buttons[i].setStyle(STYLE);
             buttons[i].setMinWidth(width);
             box.getChildren().add(buttons[i]);
         }
         return box;
     }
 
-    private static Pane createForm(String[] labels, TextField[] textFields) {
+    public static Pane createForm(TextField[] textFields, String[] labels) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setHgap(20);
-        grid.setStyle(style);
+        grid.setStyle(STYLE);
         grid.setVgap(2);
         for (int i = 0; i < labels.length; i++) {
             grid.add(new Label(labels[i] + " :"), 1, i);

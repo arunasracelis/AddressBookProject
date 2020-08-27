@@ -1,11 +1,14 @@
-package com.addressbook.app;
+package com.addressbook.utils;
 
 import com.addressbook.entity.Email;
 import com.addressbook.entity.Person;
 import com.addressbook.entity.Phone;
 import com.addressbook.service.*;
-import com.addressbook.utils.HibernateUtils;
 import org.hibernate.Session;
+
+/**
+ * Prerequisites: Dabatase "addressbook" must exist in MySQL
+ */
 
 public class DemoData {
 

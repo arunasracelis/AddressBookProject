@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.Query;
 import java.util.List;
 
+import static com.addressbook.utils.ExceptionUtils.DEFAULT_ERROR_MESSAGE;
+
 public class EmailDAOImpl implements EmailDAO {
 
     private static final Logger logger = LogManager.getLogger(EmailDAOImpl.class);
@@ -28,7 +30,7 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! addEmail failed: " + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -44,7 +46,7 @@ public class EmailDAOImpl implements EmailDAO {
             return emailList;
         } catch (Exception e) {
             logger.error("ERROR! listEmail failed: " +  ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
             return null;
         }
     }
@@ -62,7 +64,7 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! removeEmail failed: " +  ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -77,7 +79,7 @@ public class EmailDAOImpl implements EmailDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! updateEmail failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 }

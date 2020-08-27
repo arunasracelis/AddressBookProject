@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.Query;
 import java.util.List;
 
+import static com.addressbook.utils.ExceptionUtils.DEFAULT_ERROR_MESSAGE;
+
 public class PhoneDAOImpl implements PhoneDAO {
 
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
@@ -29,7 +31,7 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! addPhone failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -45,7 +47,7 @@ public class PhoneDAOImpl implements PhoneDAO {
             return phoneList;
         } catch (Exception e) {
             logger.error("ERROR! listPhone failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
             return null;
         }
     }
@@ -63,7 +65,7 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! removePhone failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 
@@ -78,7 +80,7 @@ public class PhoneDAOImpl implements PhoneDAO {
             transaction.commit();
         } catch (Exception e) {
             logger.error("ERROR! updatePhone failed: "  + ExceptionUtils.findRootCause(e));
-            AlertBox.show("Error!", "Action failed...");
+            AlertBox.show("Error!", DEFAULT_ERROR_MESSAGE);
         }
     }
 }
